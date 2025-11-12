@@ -1,0 +1,27 @@
+{
+  "name": "affine-yjs-service",
+  "version": "1.0.0",
+  "description": "YJS CRDT微服务，为AFFiNE Java后端提供YJS处理能力",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node test/test.js"
+  },
+  "keywords": ["yjs", "crdt", "microservice", "affine"],
+  "author": "AFFiNE Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "yjs": "^13.6.10",
+    "lib0": "^0.2.97",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
