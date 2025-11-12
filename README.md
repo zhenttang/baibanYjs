@@ -1,12 +1,14 @@
-# AFFiNE YJS CRDT Service
+# YUNKE YJS CRDT Service
 
-> Node.js + Yjs CRDT microservice for the AFFiNE Java backend. 强制所有 Yjs 二进制操作统一由该服务承载，确保 100% 官方兼容。
+> Node.js + Yjs CRDT microservice for the YUNKE backend, refactored from the AFFiNE service to keep 100% official compatibility. 参考 AFFiNE 架构重构出的 YUNKE 二进制 CRDT 网关，强制所有 Yjs 操作统一接入。
 
 <p align="center">
   <strong>👇 点击语言按钮直接切换 / Click a language to toggle</strong><br/>
   <a href="#chinese-doc" style="display:inline-block;padding:8px 16px;margin:8px;border-radius:6px;background:#f4b400;color:#000;font-weight:600;text-decoration:none;">🇨🇳 中文文档</a>
   <a href="#english-doc" style="display:inline-block;padding:8px 16px;margin:8px;border-radius:6px;background:#1e88e5;color:#fff;font-weight:600;text-decoration:none;">🇺🇸 English Doc</a>
 </p>
+
+> 🧭 **YUNKE 重构说明 / Rework Note**：本服务参考 AFFiNE Yjs CRDT Service 重构，继承其稳定的 CRDT 能力，并针对 YUNKE 后端业务场景做了接口与部署层面的定制；保持 upstream 兼容的同时提供专属能力。
 
 <details id="chinese-doc" open>
 <summary><strong>🇨🇳 中文 · 点击展开 / 折叠</strong></summary>
@@ -16,13 +18,14 @@
 ## 项目速览
 | 项目 | 说明 |
 | --- | --- |
-| 服务定位 | Node.js (Express) 微服务，为 AFFiNE Java 后端提供官方 Yjs Runtime 能力 |
+| 服务定位 | Node.js (Express) 微服务，参考 AFFiNE 架构重构，专为 YUNKE 后端暴露官方 Yjs Runtime |
 | CRDT 引擎 | Yjs 13.6.10 + lib0，100% 与官方格式一致 |
 | 默认端口 | `3001` |
 | 部署形态 | Node 18+ 直接运行 / Docker / Docker Compose |
 | 健康 & 指标 | `/health` 返回 200；`/metrics` 暴露 Prometheus 指标 |
 
 ## 关键特性
+- **YUNKE 定制 + AFFiNE 传承**：沿用 AFFiNE Yjs Service 的验证过的核心实现，同时补充 YUNKE 后端需要的接入与部署细节。
 - **官方兼容**：所有文档、状态向量、更新均由官方 yjs 库生成，避免 Java 端处理二进制格式。
 - **二进制安全网关**：任何试图在 Java 中自建 Yjs 二进制的行为都会造成冲突，该服务是唯一入口。
 - **批量处理**：支持批量合并/差异计算，降低网络往返次数。
@@ -233,13 +236,14 @@ public RestTemplate yjsRestTemplate() {
 ## Snapshot
 | Item | Details |
 | --- | --- |
-| Service Type | Node.js (Express) microservice exposing the official Yjs runtime to the AFFiNE Java backend |
+| Service Type | Node.js (Express) microservice refactored from the AFFiNE Yjs service to serve the YUNKE backend |
 | CRDT Engine | Yjs 13.6.10 + lib0, fully compatible with the upstream binary format |
 | Default Port | `3001` |
 | Deployment | Run on Node 18+ or via Docker / Docker Compose |
 | Health & Metrics | `/health` returns 200; `/metrics` exposes Prometheus stats |
 
 ## Highlights
+- **YUNKE-focused, AFFiNE-proven**: Built by refactoring the battle-tested AFFiNE Yjs service so YUNKE reuses the same stable CRDT core.
 - **Perfect Compatibility**: Every doc/state vector/update is produced by the official yjs library so Java never touches fragile binary formats.
 - **Binary Safety Gateway**: This service is the single entry point; hand-crafted binaries on Java are forbidden.
 - **Batch Processing**: Merge/diff multiple documents in one request to cut RTTs.
